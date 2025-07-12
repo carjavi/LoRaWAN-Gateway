@@ -10,6 +10,7 @@
 
 # Table of contents
 - [Table of contents](#table-of-contents)
+- [Por que los Gateway LoraWAN usan el protocolo "Semtech UDP Packet Forwarder" para conectarse a los servicio Clouds?](#por-que-los-gateway-lorawan-usan-el-protocolo-semtech-udp-packet-forwarder-para-conectarse-a-los-servicio-clouds)
 - [DRAGINO DLOS8N Outdoor LoRaWAN Gateway Setting](#dragino-dlos8n-outdoor-lorawan-gateway-setting)
   - [Typical Network Setup](#typical-network-setup)
   - [Ethernet conection](#ethernet-conection)
@@ -20,11 +21,11 @@
   - [Configure DLOS8N to connect to TTN v3](#configure-dlos8n-to-connect-to-ttn-v3)
   - [if all is ok!](#if-all-is-ok)
   - [LED Indicators](#led-indicators)
-- [UG67 Milesight Gateway](#ug67-milesight-gateway)
+- [UG67 Milesight Outdoor LoRaWAN Gateway Setting](#ug67-milesight-outdoor-lorawan-gateway-setting)
   - [Wireless Access](#wireless-access)
   - [Wired Access](#wired-access)
-  - [GUI ETH](#gui-eth)
   - [GUI](#gui)
+    - [Milesight LoRaWAN Gateway ](#milesight-lorawan-gateway-)
   - [Eth0 Setting](#eth0-setting)
   - [WiFi Setting](#wifi-setting)
   - [LED Indicators](#led-indicators-1)
@@ -33,13 +34,25 @@
   - [Leds \& Reset](#leds--reset)
   - [Setting Gateway](#setting-gateway)
   - [EUI Gateway](#eui-gateway)
-  - [Por que ¿Semtech UDP Packet Forwarder?](#por-que-semtech-udp-packet-forwarder)
-- [Troubleshooting](#troubleshooting)
+  - [Troubleshooting](#troubleshooting)
 
 <br>
 
+# Por que los Gateway LoraWAN usan el protocolo "Semtech UDP Packet Forwarder" para conectarse a los servicio Clouds?
+Es un protocolo antiguo y ligero, desarrollado originalmente por Semtech, para enviar datos LoRa a un Network Server, como TTN (The Things Network) o ChirpStack.
+Es un software que corre en el gateway y se encarga de:
+
+* 📨 Recibir los paquetes LoRa desde los nodos (uplinks).
+* 🌐 Enviar esos paquetes por UDP a un servidor central (Network Server).
+* 📥 Recibir downlinks desde el servidor, y transmitirlos por LoRa.
+
+Este sistema utiliza un protocolo binario sobre UDP, sin encriptación, sin autenticación avanzada, y sin compresión. NO es muy seguro por eso hay otras versiones como:
+* Basic Station (de Semtech)
+* LoRa Basics™ Station (con WebSockets, TLS, multifuncional)
+* ChirpStack UDP Forwarder (más flexible)
 
 # DRAGINO DLOS8N Outdoor LoRaWAN Gateway Setting
+Quick Start Guide
 <p align="center"><img src="./img/gateway-DLOS8N.png" width="700"   alt=" " /></p>
 
 info: http://wiki.dragino.com/xwiki/bin/view/Main/User%20Manual%20for%20All%20Gateway%20models/DLOS8N/
@@ -144,45 +157,41 @@ In TTN v3 portal, we can also see the gateway is connected.
 
 <br>
 
-# UG67 Milesight Gateway
+# UG67 Milesight Outdoor LoRaWAN Gateway Setting
 Quick Start Guide
 <p align="center"><img src="./img/ug67.png" width="400"   alt=" " /></p>
 
+info: https://resource.milesight.com/milesight/iot/document/ug67-user-guide-en.pdf <br>
+info: https://resource.milesight-iot.com/document/UG67%20Quick%20Guide%20V1.1.pdf
 
 ##  Wireless Access
-Wi-Fi IP Access point: ```192.168.1.1``` <br>
-ssid: Gateway_****** <br>
+Access Point: ```192.168.1.1``` <br>
+ssid: ```Gateway_******``` <br>
 pass: ```iotpassword``` <br>
 
-Milesight LoRaWAN Gateway <br>
-Username: ```admin``` <br>
-Password: ```password``` <br>
 
+Gateway GUI Wifi Address: ```192.168.1.1``` 
 
 ## Wired Access 
 
-IP router: 192.168.23.150 <br>
-> :memo: **Note:** hay que estar en esta red 
+IP gateway: ```192.168.23.150``` <br>
 
-IP PC (Sujerido) <br>
+PC Setting (Cliente) <br>
 IP Address:       ```192.168.23.200``` <br>
 SubNet Mask:      ```255.255.255.0``` <br>
 Default gateway:  ```192.168.23.150``` <br>
+Preferred DNS server: ```8.8.8.8``` <br>
 
-preferred DNS server: ```8.8.8.8``` <br>
-
-## GUI ETH 
-ETH IP Address: ```192.168.23.150``` <br>
-
-Milesight LoRaWAN Gateway <br>
-Username: ```admin``` <br>
-Password: ```password``` <br>
+Gateway GUI ETH Address: ```192.168.23.150``` <br>
 
 ## GUI
+### Milesight LoRaWAN Gateway <br>
+Username: ```admin``` <br>
+Password: ```password``` <br>
 <p align="center"><img src="./img/ug67_1.png" width="700"   alt=" " /></p>
 
 ## Eth0 Setting
-Alimentado por PPPoE
+Alimentado por Eth0/PPPoE
 <p align="center"><img src="./img/ug67_eth0.png" width="700"   alt=" " /></p>
 
 ## WiFi Setting
@@ -220,11 +229,11 @@ Menu/Network/Interface/<br>
 Opciones para configurar internet: <br>
 ```Port``` configurar internet **DHCP** por el Eth0 <br>
 ```Wlan``` desactivar el AP y configurar internet en Modo cliente buscando una Red (no funciona SCAN WiFi conectado al gateway en AP) <br>
-* Go to “Network” → “Interface” → “WLAN” and select “Client” mode. 
-* Click “Scan” to search for Wi-Fi access point. Select the available one and click “Join Network”
+* Go to ```Network``` → ```Interface``` → ```WLAN``` and select ```Client``` mode. 
+* Click ```Scan``` to search for Wi-Fi access point. Select the available one and click ```Join Network```
 * Type the key of Wi-Fi.
 * ip config/protocol DHCP Client.
-* Go to “Status”→”WLAN” to check Wi-Fi status. If it shows “Connected”, it means gateway connectstoWi-Fi successfully.
+* Go to ```Status```→ ```WLAN``` to check Wi-Fi status. If it shows ```Connected```, it means gateway connectstoWi-Fi successfully.
 
 2. ```Disable Default Server``` <br>
 In the left menu, choose Packet Forwarder/General.  hay que desabilitar el "Embedded NS"
@@ -232,19 +241,19 @@ In the left menu, choose Packet Forwarder/General.  hay que desabilitar el "Embe
 3. ```Connect Milesight UG67 with UDP Packet Forwarder``` <br>
 En  Mult-Destination crear un nuevo server y Habilitar (In the Packet Forwarder menu and General tab, click the little + button to create a new server)<br>
 Type: ```Semtech``` <br>
-Server Address: ```xxxxx.nam1.cloud.thethings.indutries``` <br>
-Port UP: 1700 <br>
-Port Down: 1700 <br>
+Server Address: custom → ```xxxxx.nam1.cloud.thethings.indutries``` <br>
+Port UP: ```1700``` <br>
+Port Down: ```1700``` <br>
 
-<p align="center"><img src="./img/ug67_semtech.png" width="700"   alt=" " /></p>
+<p align="center"><img src="./img/ug67_semtech.png" width="500"   alt=" " /></p>
 
 > :memo: **Note:** For the Server Address choose custom, and enter the address of The Things Stack deployment you are using
 
 4. ```Check the LoRawan radio frequency ```
 Packet Forwarder/Radios/Radio Channel Setting/ <br>
-Sopppoted Freq ==> AU915
+Sopppoted Freq → AU915
 
-5. ```Add Gateway in The Thing Stack (TTN)```
+5. ```Add EUI Gateway in The Thing Stack (TTN) o Cloud Plataforme Lorawan server```
 
 <br>
 
@@ -254,27 +263,8 @@ Sopppoted Freq ==> AU915
 
 <br>
 
-## Por que ¿Semtech UDP Packet Forwarder?
-Es un protocolo antiguo y ligero, desarrollado originalmente por Semtech, para enviar datos LoRa a un Network Server, como TTN (The Things Network) o ChirpStack.
-Es un software que corre en el gateway y se encarga de:
 
-* 📨 Recibir los paquetes LoRa desde los nodos (uplinks).
-
-* 🌐 Enviar esos paquetes por UDP a un servidor central (Network Server).
-
-* 📥 Recibir downlinks desde el servidor, y transmitirlos por LoRa.
-
-Este sistema utiliza un protocolo binario sobre UDP, sin encriptación, sin autenticación avanzada, y sin compresión. NO es muy seguro por eso hay otras versiones como:
-* Basic Station (de Semtech)
-
-* LoRa Basics™ Station (con WebSockets, TLS, multifuncional)
-
-* ChirpStack UDP Forwarder (más flexible)
-
-
-<br>
-
-# Troubleshooting
+## Troubleshooting
 * Si el Led LoRa esta apagado, o no es posible conectarse via Ethernet es recomendable reset gateway.
 * Si no conecta a internet conectado desde el Eth0 verificar que el **DHCP** este habilitado en ese puerto
        
