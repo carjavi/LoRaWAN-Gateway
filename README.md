@@ -193,6 +193,7 @@ Password: ```password``` <br>
 ## Eth0 Setting
 Alimentado por Eth0/PPPoE
 <p align="center"><img src="./img/ug67_eth0.png" width="700"   alt=" " /></p>
+<p align="center"><img src="./img/ug67_eth0_DHCP.png" width="700"   alt=" " /></p>
 
 ## WiFi Setting
 <p align="center"><img src="./img/ug67_wifi.png" width="700"   alt=" " /></p>
