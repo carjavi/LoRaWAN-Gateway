@@ -51,6 +51,8 @@ Este sistema utiliza un protocolo binario sobre UDP, sin encriptación, sin aute
 * LoRa Basics™ Station (con WebSockets, TLS, multifuncional)
 * ChirpStack UDP Forwarder (más flexible)
 
+<br>
+
 # DRAGINO DLOS8N Outdoor LoRaWAN Gateway Setting
 Quick Start Guide
 <p align="center"><img src="./img/gateway-DLOS8N.png" width="700"   alt=" " /></p>
@@ -191,8 +193,9 @@ Password: ```password``` <br>
 <p align="center"><img src="./img/ug67_1.png" width="700"   alt=" " /></p>
 
 ## Eth0 Setting
-Alimentado por Eth0/PPPoE
+Alimentado por Eth0/Adaptador PPPoE/Router
 <p align="center"><img src="./img/ug67_eth0.png" width="700"   alt=" " /></p>
+Alimentado desde conector de Power y Eth0 conectado directamente al router
 <p align="center"><img src="./img/ug67_eth0_DHCP.png" width="700"   alt=" " /></p>
 
 ## WiFi Setting
