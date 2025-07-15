@@ -37,8 +37,9 @@
   - [Power Externa](#power-externa)
   - [Reset](#reset)
   - [Leds \& Reset](#leds--reset)
-  - [Setting Gateway](#setting-gateway)
+  - [Configure UG67 to connect to TTN v3](#configure-ug67-to-connect-to-ttn-v3)
   - [EUI Gateway](#eui-gateway)
+- [Embedded NS into UG67](#embedded-ns-into-ug67)
   - [Troubleshooting](#troubleshooting)
 
 <br>
@@ -266,7 +267,7 @@ Alimentado desde conector de Power y Eth0 conectado directamente al router
 <br>
 
 
-## Setting Gateway
+## Configure UG67 to connect to TTN v3
 
 1. ```Setting WiFi``` <br>
 Menu/Network/Interface/<br>
@@ -280,16 +281,17 @@ Opciones para configurar internet: <br>
 * Go to ```Status```→ ```WLAN``` to check Wi-Fi status. If it shows ```Connected```, it means gateway connectstoWi-Fi successfully.
 
 2. ```Disable Default Server``` <br>
-In the left menu, choose Packet Forwarder/General.  hay que desabilitar el "Embedded NS"
+In the left menu, choose Packet Forwarder/General.  hay que desabilitar el ```"Embedded NS"``` (**Embedded NS**, es el servidor de red está integrado -embebido- dentro de un dispositivo o gateway)
 
 3. ```Connect Milesight UG67 with UDP Packet Forwarder``` <br>
-En  Mult-Destination crear un nuevo server y Habilitar (In the Packet Forwarder menu and General tab, click the little + button to create a new server)<br>
+En  Mult-Destination crear un nuevo server y Habilitar (In the Packet Forwarder menu and General tab, click the little ```+``` button to create a new server)<br>
 Type: ```Semtech``` <br>
 Server Address: custom → ```xxxxx.nam1.cloud.thethings.indutries``` <br>
 Port UP: ```1700``` <br>
 Port Down: ```1700``` <br>
 
 <p align="center"><img src="./img/ug67_semtech.png" width="500"   alt=" " /></p>
+<p align="center"><img src="./img/ug67_pf.png" width="800"   alt=" " /></p>
 
 > :memo: **Note:** For the Server Address choose custom, and enter the address of The Things Stack deployment you are using
 
@@ -307,6 +309,23 @@ Sopppoted Freq → AU915
 
 <br>
 
+# Embedded NS into UG67 
+Embedded NS es un Network Server embebido en un dispositivo (como un gateway), que permite gestionar una red LoRaWAN de forma local y autónoma, sin depender de servidores externos.
+
+Ventajas de un Embedded NS
+* Autonomía: No depende de la nube ni de servidores externos.
+* Privacidad: Los datos pueden quedarse dentro de la red local.
+* Menos componentes externos, más fácil de desplegar en sitios remotos.
+* Puedes configurar el gateway para que reenvíe automáticamente los datos recibidos de los nodos a un servidor remoto usando protocolos como HTTP o MQTT, permitiendo que aplicaciones externas (APIs, bases de datos, dashboards, etc.) reciban y procesen los datos en tiempo real.
+
+Desventajas
+* Escalabilidad limitada: No es ideal para redes muy grandes.
+* Menos flexibilidad: Puede tener menos funciones avanzadas que un NS en la nube.
+* El UG67 almacena temporalmente los mensajes recibidos de los nodos para su visualización en la GUI (por ejemplo, en la sección Traffic). Sin embargo, este almacenamiento es volátil y limitado: los mensajes no se guardan de forma permanente ni en grandes volúmenes.
+El propósito principal es el monitoreo y diagnóstico, no el almacenamiento histórico.
+* El acceso directo a mensajes almacenados en el gateway vía API local depende del firmware y no es la forma recomendada ni más robusta para producción.
+  
+<br>
 
 ## Troubleshooting
 * Si el Led LoRa esta apagado, o no es posible conectarse via Ethernet es recomendable reset gateway.
