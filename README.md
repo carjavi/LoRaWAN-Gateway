@@ -10,6 +10,11 @@
 
 # Table of contents
 - [Table of contents](#table-of-contents)
+- [Tecnologías de conectividad para IoT (Internet de las Cosas) para Gateway](#tecnologías-de-conectividad-para-iot-internet-de-las-cosas-para-gateway)
+    - [LoRaWAN](#lorawan)
+    - [NB-IoT (Narrowband IoT)](#nb-iot-narrowband-iot)
+    - [LTE-M (LTE Cat-M1)](#lte-m-lte-cat-m1)
+    - [Resumen](#resumen)
 - [Por que los Gateway LoraWAN usan el protocolo "Semtech UDP Packet Forwarder" para conectarse a los servicio Clouds?](#por-que-los-gateway-lorawan-usan-el-protocolo-semtech-udp-packet-forwarder-para-conectarse-a-los-servicio-clouds)
 - [DRAGINO DLOS8N Outdoor LoRaWAN Gateway Setting](#dragino-dlos8n-outdoor-lorawan-gateway-setting)
   - [Typical Network Setup](#typical-network-setup)
@@ -35,6 +40,41 @@
   - [Setting Gateway](#setting-gateway)
   - [EUI Gateway](#eui-gateway)
   - [Troubleshooting](#troubleshooting)
+
+<br>
+
+# Tecnologías de conectividad para IoT (Internet de las Cosas) para Gateway
+### LoRaWAN
+* Tipo de red: Red de área amplia de baja potencia (LPWAN) no celular.
+* Frecuencia: Usa bandas ISM sin licencia (como 868 MHz en Europa, 915 MHz en América).
+* Cobertura: Muy amplia (hasta 15 km en zonas rurales, 2-5 km en ciudades).
+* Consumo de energía: Muy bajo, ideal para dispositivos que deben durar años con baterías.
+* Velocidad de datos: Baja (0.3 kbps a 50 kbps).
+* Ventajas: Bajo costo, despliegue privado posible, excelente para sensores remotos.
+* Desventajas: No apto para aplicaciones que requieren alta velocidad o transmisión continua de datos.
+
+### NB-IoT (Narrowband IoT)
+* Tipo de red: LPWAN basada en redes celulares (4G/LTE).
+* Frecuencia: Usa bandas licenciadas de operadores móviles.
+* Cobertura: Muy buena, incluso en interiores y subterráneos.
+* Consumo de energía: Bajo, aunque generalmente un poco más alto que LoRaWAN.
+* Velocidad de datos: Baja (hasta 250 kbps).
+* Ventajas: Seguridad y confiabilidad de la red celular, buena penetración en edificios, roaming internacional.
+* Desventajas: Dependencia de operadores móviles, costos de suscripción, no apto para aplicaciones de alta velocidad.
+
+### LTE-M (LTE Cat-M1)
+* Tipo de red: LPWAN basada en redes celulares (4G/LTE).
+* Frecuencia: Usa bandas licenciadas de operadores móviles.
+* Cobertura: Similar a NB-IoT, pero con mejor soporte para movilidad (roaming, handover).
+* Consumo de energía: Bajo, pero mayor que NB-IoT y LoRaWAN en algunos casos.
+* Velocidad de datos: Moderada (hasta 1 Mbps).
+* Ventajas: Soporta voz (VoLTE), movilidad, transmisión de datos más rápida, ideal para dispositivos en movimiento.
+* Desventajas: Costos de suscripción, consumo de energía algo mayor, dependencia de operadores.
+
+### Resumen
+```LoRaWAN```: Ideal para sensores remotos, bajo costo, despliegue privado, baja velocidad. <br>
+```NB-IoT```: Para sensores fijos, buena penetración, red celular, baja velocidad, más seguro. <br>
+```LTE-M```: Para dispositivos móviles, mayor velocidad, voz, red celular, más versátil.<br>
 
 <br>
 
